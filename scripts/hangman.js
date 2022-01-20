@@ -32,17 +32,17 @@ Hangman.prototype.makeGuess= function(guess) {
  
 
 const game1= new Hangman('cOLA', 3)
-game1.makeGuess('o')
-game1.makeGuess('p')
-game1.makeGuess('t')
 console.log(game1.puzzleWord())
 console.log(game1.numbGuessing)
 
 
-const game2= new Hangman('bye', 2)
-game2.makeGuess('y')
-console.log(game2.puzzleWord())
-console.log(game2.numbGuessing)
 
+window.addEventListener('keypress', function (e) {
+    const guess = String.fromCharCode(e.charCode)
+    // console.log(guess)
+    game1.makeGuess(guess)
+    console.log(game1.puzzleWord())
+    console.log(game1.numbGuessing)
+})
 
 
