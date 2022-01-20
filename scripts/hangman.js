@@ -30,19 +30,22 @@ Hangman.prototype.makeGuess= function(guess) {
     }
 }
  
-
 const game1= new Hangman('cOLA', 3)
-console.log(game1.puzzleWord())
-console.log(game1.numbGuessing)
+
+const puzzleEL = document.querySelector('#puzzle')
+puzzleEL.textContent = game1.puzzleWord()
+
+const guessesEl = document.querySelector('#guesses')
+guessesEl.textContent = game1.numbGuessing
+
 
 
 
 window.addEventListener('keypress', function (e) {
     const guess = String.fromCharCode(e.charCode)
-    // console.log(guess)
     game1.makeGuess(guess)
-    console.log(game1.puzzleWord())
-    console.log(game1.numbGuessing)
+    puzzleEL.textContent = game1.puzzleWord()
+    guessesEl.textContent = game1.numbGuessing
 })
 
 
