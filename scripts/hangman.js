@@ -2,6 +2,8 @@ const Hangman = function(word, numbGuessing) {
     this.word= word.toLowerCase().split('')
     this.numbGuessing= numbGuessing
     this.guessedLetters= []
+    this.status = 'playing'
+
 }
 
 Hangman.prototype.puzzleWord= function(){
@@ -28,24 +30,25 @@ Hangman.prototype.makeGuess= function(guess) {
     if (isUnique && isBadGuess) {
         this.numbGuessing--
     }
+
+    this.calculateStatus()
 }
- 
-const game1= new Hangman('cOLA', 3)
-
-const puzzleEL = document.querySelector('#puzzle')
-puzzleEL.textContent = game1.puzzleWord()
-
-const guessesEl = document.querySelector('#guesses')
-guessesEl.textContent = game1.numbGuessing
 
 
+Hangman.prototype.calculateStatus = function() {
+    const finished = this.word.every((letter) => {
+        return this.guessedLetters.includes(letter)
+    })
+    // const letterUnguessed = this.word.filter((letter) => {
+    //     return !this.guessedLetters.includes(letter)
+    // })
+    // const finished = letterUnguessed.length === 0
 
-
-window.addEventListener('keypress', function (e) {
-    const guess = String.fromCharCode(e.charCode)
-    game1.makeGuess(guess)
-    puzzleEL.textContent = game1.puzzleWord()
-    guessesEl.textContent = game1.numbGuessing
-})
-
-
+    if (this.numbGuessing === 0) {
+        this.status = 'failed'
+    } else if (finished) {
+        this.status = 'finished'
+    } else {
+        this.status = 'Still playing'
+    }
+}
