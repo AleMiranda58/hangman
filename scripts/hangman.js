@@ -24,6 +24,10 @@ Hangman.prototype.makeGuess= function(guess) {
     const isUnique = !this.guessedLetters.includes(guess)
     const isBadGuess = !this.word.includes(guess)
 
+    if (this.status !== 'playing') { 
+        return
+    }
+
     if (isUnique) {
         this.guessedLetters.push(guess)
     }
@@ -39,16 +43,13 @@ Hangman.prototype.calculateStatus = function() {
     const finished = this.word.every((letter) => {
         return this.guessedLetters.includes(letter)
     })
-    // const letterUnguessed = this.word.filter((letter) => {
-    //     return !this.guessedLetters.includes(letter)
-    // })
-    // const finished = letterUnguessed.length === 0
+
 
     if (this.numbGuessing === 0) {
         this.status = 'failed'
     } else if (finished) {
         this.status = 'finished'
     } else {
-        this.status = 'Still playing'
+        this.status = 'playing'
     }
 }
