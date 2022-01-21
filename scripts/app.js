@@ -13,8 +13,14 @@ window.addEventListener('keypress', function (e) {
 
 
 const render = () => {
-    puzzleEL.textContent = game1.puzzleWord
+    puzzleEL.innerHTML = ''
     guessesEl.textContent = game1.statusMessage
+
+    game1.puzzleWord.split('').forEach((letter) => {
+        const letterEl = document.createElement('span')
+        letterEl.textContent = letter
+        puzzleEL.appendChild(letterEl)
+    })
 }
 
 
