@@ -17,13 +17,10 @@ window.addEventListener('keypress', function (e) {
 })
 
 
-getPuzzle("1",(error, puzzle) => {
-    if (error) {
-    console.log('Something went wrong')
-
-    } else {
-        console.log(puzzle)
-    }
+getPuzzle('1').then((puzzle)=> {
+    console.log(puzzle)
+}, (err)=> {
+    console.log(`Error: ${err}`)
 })
 
 
